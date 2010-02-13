@@ -120,7 +120,7 @@ class FeedHandler(RootHandler):
         # to the feed, all others get redirected
         feed_address = models.Setting.get_dictionary()['feedburner_address']
         if feed_address:
-            userAgent = self.request.headers.get('User-Agent', '')
+            userAgent = self.request.headers.get('User-Agent', '').lower()
             if not 'feedburner' in userAgent:
                 return self.redirect(feed_address)
 
