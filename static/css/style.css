@@ -50,6 +50,10 @@ blockquote {
   padding-left: 10px;
 }
 
+#archive h3 {
+  margin-top: 20px;
+}
+
 #content, #footer {
   max-width: 500px;
   margin: 0 auto;
@@ -64,7 +68,6 @@ blockquote {
 #footer hr {
   display: none;
 }
-
 
 /* Code highlighting */
 pre, .codehilite pre {

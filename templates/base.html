@@ -43,8 +43,11 @@
         </div>
         {% endif %}
 
-        {% if item.title %}
+        {% if item.title and not archive %}
         <h1>{{ item.title|escape }}</h1>
+        {% endif %}
+        {% if archive %}
+        <h1>Archive</h1>
         {% endif %}
 
         {% if item.content_html %}
@@ -64,7 +67,6 @@
           {% regroup posts by publish_date.year as years %}
           {% if years %}
             <div id="archive">
-              <h2>Full Archives</h2>
               {% for year in years %}
               <div class="year" id="y-{{ year.grouper }}">
                 {% regroup year.list by publish_date.month as months %}
