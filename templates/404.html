@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+<h1><a href="http://{{ settings.site_host}}/">{{ settings.site_title|escape }}</a>: Not Found</h1>
+
+<p>You asked for: "<code>{{ path|escape }}</code>"</p>
+
+<p>But I have no idea what you are talking about. Try searching:</p>
+
+<form method="get" action="http://www.google.com/search">
+  <input type="text" name="q" id="q" value="site:{{ settings.site_host }}" />
+  <input type="submit" value="Search" />
+</form>
+{% endblock %}

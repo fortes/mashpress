@@ -1,0 +1,39 @@
+application: mashpress # Change this for a new app / datastore
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+
+# Remote
+- url: /remote_api
+  #login: admin
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+
+# Static files
+- url: /css
+  static_dir: static/css
+- url: /img
+  static_dir: static/img
+- url: /js
+  static_dir: static/js
+- url: /favicon\.ico
+  static_files: static/img/favicon.ico
+  upload: static/img/favicon.ico
+- url: /robots\.txt
+  static_files: static/robots.txt
+  upload: static/robots.txt
+
+# Restricted admin
+- url: /admin/?.*
+  script: urls.py
+  login: admin
+
+# Built-in GAE Admin, disable if you don't like it
+- url: /gae_admin/?.*
+  script: $PYTHON_LIB/google/appengine/ext/admin
+  login: admin
+
+# Everything else goes to our base handler
+- url: .*
+  script: urls.py

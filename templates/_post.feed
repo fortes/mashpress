@@ -1,0 +1,10 @@
+<entry>
+    <title>{{ item.title|escape }}</title>
+    <link rel="alternate" type="text/html" href="http://{{ slug.host }}{{ item.slug }}" />
+    <id>tag:{{ settings.site_host }},{{ item.publish_date|date:"Y-m-d" }}:{{ item.key }}</id>
+    <updated>{{ item.updated_date|date:"Y-m-d\TH:i:s\Z" }}</updated>
+    <published>{{ item.publish_date|date:"Y-m-d\TH:i:s\Z" }}</published>
+    <content type="html">
+        {{ item.content_html|escape }}
+    </content>
+</entry>

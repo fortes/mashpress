@@ -1,0 +1,236 @@
+body {
+  font-family: Sans-Serif;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 40px 20px;
+  overflow-y: scroll;
+}
+
+/* Forms */
+select, input[type=text], input[type=url], textarea {
+  font-family: Monospace;
+  border: 2px solid #ddd;
+  font-size: 14px;
+  line-height: 16px;
+  padding: 2px;
+  margin: 0 2px;
+}
+
+input[type=checkbox] {
+  border: 2px solid #ddd;
+  vertical-align: baseline;
+  padding: 2px;
+  margin: 2px;
+}
+
+input[type=submit], button[type=submit] {
+  border: 1px solid #999;
+  border-radius: 3px;
+  margin: 2px;
+  padding: 2px 12px;
+  background: #f0f0f0;
+  font-weight: bold;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+#nav {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: #f3f3f9;
+  border-bottom: 2px solid #eef;
+  padding-bottom: 4px;
+}
+
+#nav a {
+  color: #33c;
+}
+
+#nav-bar, #user-bar {
+  position: absolute;
+  top: 5px;
+}
+
+#nav-bar {
+  left: 10px;
+}
+
+#user-bar {
+  right: 10px;
+}
+
+#content {
+  max-width: 920px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+h2 {
+  font-size: 30px;
+  line-height: 40px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+td, th {
+  vertical-align: baseline;
+}
+
+td textarea {
+  height: 80px;
+}
+
+#settings th, #advanced th {
+  text-align: right;
+  padding-right: 5px;
+}
+
+#settings th, #settings td {
+  padding-bottom: 20px;
+}
+
+#settings input[type=text], #settings input[type=url], #settings textarea {
+  width: 90%;
+}
+
+#settings input.short, #advanced input.short[type=text] {
+  width: 150px;
+}
+
+#settings th.textarea {
+  vertical-align: top;
+}
+
+#settings p, #advanced p {
+  color: #666;
+  margin: 0;
+  font-style: italic;
+}
+
+#advanced h3 {
+  margin: 20px 0 0;
+  border-top: 1px solid #eef;
+  padding-top: 19px;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+#advanced table {
+  margin-top: 20px;
+}
+
+#advanced input[type=text] {
+  width: 400px;
+}
+
+#advanced h4 {
+  font-size: 16px;
+  line-height: 20px;
+  margin: 20px 0 0;
+}
+
+div.submit {
+  margin-top: 20px;
+  margin-right: 300px;
+  text-align: right;
+}
+
+.textarea-container {
+  position: relative;
+  height: 400px;
+  margin: 0;
+  margin-top: 20px;
+  padding: 0;
+}
+
+.textarea-container textarea {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 5px;
+  right: 300px;
+  height: 386px;
+  margin: 0;
+  font-size: 12px;
+  overflow-y: scroll;
+}
+
+.textarea-help {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #fffcf0;
+  width: 260px;
+  padding: 10px;
+  height: 380px;
+  overflow: hidden;
+  overflow-y: scroll;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.textarea-help p, .textarea-help h4 {
+  font-size: 15px;
+  margin: 0 0 20px;
+}
+
+#item-title, #item-url {
+  margin: 0;
+}
+
+#item-url {
+  color: #aaa;
+}
+
+#item-slug {
+  color: #000;
+}
+
+div.submit input {
+  margin-left: 10px;
+}
+
+h4.item {
+  margin: 0;
+  min-width: 400px;
+}
+
+p.slug {
+  visibility: hidden;
+  margin: 0;
+  color: #999;
+  font-size: 12px;
+}
+
+tr:hover p.slug {
+  visibility: visible;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr.even {
+  background: #eee;
+}
+
+h4 a {
+  color: #02a;
+  text-decoration: none;
+}
+
+td, th {
+  padding: 10px;
+}
+
+.status {
+  color: #999;
+}
+
+tr.trash, tr.trash a, tr.trash .status {
+  color: #ccc;
+  text-decoration: line-through;
+}

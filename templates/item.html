@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body %}
+<div id="breadcrumb">
+  <a href="/">{{ settings.site_title|escape }}</a> &raquo; {{ item.title|escape }}
+</div>
+
+{% if item.title %}
+<h1>{{ item.title|escape }}</h1>
+{% endif %}
+{% if item.is_post %}
+<p class="date">posted {{ item.publish_date|date:"Y-m-d"}}</p>
+{% endif %}
+
+{% if item.content_html %}
+<div id="main-content">{{ item.content_html }}</div>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,13 @@
+<div class="post">
+  <h2><a href="{{ post.slug|escape }}" rel="bookmark">{{ post.title|escape }}</a></h2>
+  <p class="date">
+    {{ post.publish_date|date:"M d, Y"}} |
+    <a href="{{ post.slug|escape }}" class="permalink" rel="bookmark">link</a>
+  </p>
+
+  <div class="content">{{ post.content_html }}</div>
+
+  {% if post.tag_links_cached %}
+    <p class="tags">Tags: {{ post.tag_links_cached }}</p>
+  {% endif %}
+</div>

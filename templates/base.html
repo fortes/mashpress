@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>
+      {{ title|escape }}
+      {% if not item.is_root %}({{ settings.site_title|escape }}){% endif %}
+    </title>
+    <link rel="stylesheet" href="/css/style.css" />
+    {% if settings.feedburner_address %}
+    <link rel="alternate" type="application/rss+xml" href="http://{{ settings.feedburner_address }}"
+          title="{{ settings.site_title|escape }}: All posts" />
+    {% else %}
+    <link rel="alternate" type="application/rss+xml" href="/feed"
+          title="{{ settings.site_title|escape }}: All posts" />
+    {% endif %}
+    {% if settings.google_profile %}
+    <link rel="openid2.provider" href="https://www.google.com/accounts/o8/ud?source=profiles" />
+    <link rel="openid2.local_id" href="http://www.google.com/profiles/{{ settings.google_profile }}" />
+    {% endif %}
+
+    {# iPhone #}
+    <meta name="viewport" content="width=device-width" />
+
+    {# Semantic BS #}
+    <meta name="author" content="{{ settings.author_name|escape }}" />
+    <link rel="home" href="/" />
+    <link rel="index" href="/archive" />
+    <link rel="canonical" href="http://{{ settings.site_host }}{{ item.slug|escape }}" />
+    {% if not item.is_root %}
+    <link rel="bookmark" href="{{ item.slug|escape }}" />
+    {% else %}
+    <meta name="description" content="{{ settings.site_blurb|striptags|escape }}" />
+    {% endif %}
+  </head>
+
+  <body>
+    <div id="content">
+      {% block body %}
+        {% if archive %}
+        <div id="breadcrumb">
+          <a href="/">{{ settings.site_title|escape }}</a> &raquo; Archive
+        </div>
+        {% endif %}
+
+        {% if item.title %}
+        <h1>{{ item.title|escape }}</h1>
+        {% endif %}
+
+        {% if item.content_html %}
+        <div id="main-content">{{ item.content_html }}</div>
+        {% endif %}
+
+        {% if not archive %}
+          <div id="posts">
+            {% for post in posts %}
+              {% include '_post.html' %}
+            {% endfor %}
+          </div>
+          <div id="archive-link">
+            <a href="{{ item.archive_link }}">Archive of all posts</a>
+          </div>
+        {% else %}
+          {% regroup posts by publish_date.year as years %}
+          {% if years %}
+            <div id="archive">
+              <h2>Full Archives</h2>
+              {% for year in years %}
+              <div class="year" id="y-{{ year.grouper }}">
+                {% regroup year.list by publish_date.month as months %}
+                {% for month in months %}
+                <h3 id="y-{{ year.grouper }}-m-{{ month.grouper }}">{{ month.list.0.publish_date|date:"M Y" }}</h3>
+                <ol>
+                  {% for post in month.list %}
+                    <li value={{ post.publish_date.day }}"><a href="{{post.slug}}">{{ post.title|escape }}</a></li>
+                  {% endfor %}
+                </ol>
+                {% endfor %}
+              </div>
+              {% endfor %}
+            </div>
+          {% else %}
+            <p>No posts</p>
+          {% endif %}
+        {% endif %}
+      {% endblock %}
+    </div>
+
+    <div id="footer">
+      <hr />
+      <p>{{ settings.site_blurb }}</p>
+    </div>
+
+    {% if settings.google_analytics %}
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', '{{ settings.google_analytics|escape }}']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'http://www.google-analytics.com/ga.js';
+        document.getElementsByTagName('head')[0].appendChild(ga);
+      })();
+    </script>
+    {% endif %}
+  </body>
+</html>

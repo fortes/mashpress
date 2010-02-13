@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block body %}
+{% if item.is_saved %}
+<h2 id="item-title">{{ item.title|escape }}</h2>
+{% if not item.is_root %}
+<pre id="item-url">http://{{ settings.site_host }}<span id="item-slug">{{ item.slug|escape }}</span></pre>
+{% else %}
+<pre id="item-url"><span id="item-slug">http://{{ settings.site_host }}/</span></pre>
+{% endif %}
+{% else %}
+<h2 id="item-title">New Post</h2>
+<pre id="item-url">{{ item.slug|default:""|escape }}</pre>
+{% endif %}
+
+<form method="post" action="{{ path }}">
+  <div class="textarea-container">
+    <textarea id="item-content" name="content" rows="10" cols="40">{{ item.content|default:""|escape }}</textarea>
+    <div class="textarea-help">
+      <h4>Markdown cheatsheet (<a href="http://daringfireball.net/projects/markdown/syntax">Full reference</a>)</h4>
+      <pre>title: Post title
+slug: manual-post-slug
+date: 1999 12 31
+
+*italic*   **bold**
+[link](http://ex.com "Title")
+![alt](/path/img.jpg "Title")
+
+# h1   ## h2   ### h3
+
+1. Numbered
+2. List
+3. Here
+
+*   Nested lists
+Also work
+    * Like this
+
+`variable_name`
+
+    :::python
+    block_code
+    spaces = 4
+
+&gt; Blockquote
+&gt; like this
+
+[TOC]
+      </pre>
+    </div>
+  </div>
+
+  <div class="submit">
+    {% if not item.is_published %}
+      <input type="submit" name="action" value="Save" />
+    {% endif %}
+    <input type="submit" name="action" value="Publish" />
+    {% if item.is_saved %}
+      <input type="submit" name="action" value="Delete" />
+    {% endif %}
+  </div>
+
+  <h3>Rendered HTML</h3>
+  <div id="preview">
+    {{ item.content_html }}
+  </div>
+</form>
+{% endblock %}

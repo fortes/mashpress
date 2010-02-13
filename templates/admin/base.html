@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+{% block head %}
+    <title>{% block title %}{{ title|default:"TITLE GOES HERE"}}{% endblock %}</title>
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/admin.css" />
+{% endblock %}
+{% endblock %}
+  </head>
+
+  <body>
+{% block admin-nav %}
+    <div id="nav">
+      <span id="nav-bar">
+        <a href="/admin">Admin Home</a> |
+        <a href="/admin/item">New Item</a> |
+        <a href="/">{{ settings.site_title|default:"Site"|escape }}</a>
+      </span>
+      <span id="user-bar">
+        <strong id="username">{{ user.email }}</strong> |
+        <a href="/admin/settings">Settings</a> |
+        {% if settings.advanced_mode %}
+        <a href="/gae_admin">GAE Admin</a> |
+        {% endif %}
+        <a href="{{ logout_url|escape }}">Logout</a>
+      </span>
+    </div>
+{% endblock %}
+    <div id="content">
+{% block body %}{% endblock %}
+    </div>
+{% block scripts %}
+{% endblock %}
+  </body>
+</html>

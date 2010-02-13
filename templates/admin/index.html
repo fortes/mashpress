@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block body %}
+
+<h2>All Items</h2>
+
+<form method="post" action="/admin">
+<p class="commands">
+  <input type="submit" name="new" value="New" />
+</p>
+<table>
+  {% for item in items %}
+  <tr class="{{ item.verbose_status|lower }} {% cycle even,odd %}">
+    <td>
+      <h4 class="item"><a href="/admin/item/{{ item.key.id }}">{{ item.title|default:"No Title"|escape }}</a></h4>
+      <p class="slug"><tt><a href="{{ item.slug|escape }}">{{ item.slug|escape }}</a></tt></p>
+    </td>
+    <td>
+      {{ item.publish_date|date:"Y-m-d" }}<br />
+      <span class="status">{{ item.verbose_status }}</span>
+    </td>
+    <td>
+      <button type="submit" name="edit" value="{{ item.key.id }}">Edit</button><br />
+      <button type="submit" name="delete" value="{{ item.key.id }}">
+        {% if item.is_trash %}Purge{% else %}Trash{% endif %}
+      </button>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</form>
+{% endblock %}
