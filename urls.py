@@ -4,19 +4,22 @@ from google.appengine.api import users
 
 # Local
 import handlers
+import admin_handlers
 import models
 
 SITE_ROUTES = [
     ('(.+)/+$', handlers.SlashRedirectHandler),
     ('/(\d{4})(?:/(\d{2}))?', handlers.DateHandler),
-    ('/(archives?)?(feed)?$', handlers.RootHandler),
+    ('/$', handlers.RootHandler),
+    ('/feed$', handlers.FeedHandler),
+    ('/archives?$', handlers.ArchiveHandler),
     ('(.+?)$', handlers.SiteHandler)
 ]
 
 ADMIN_ROUTES = [
-    ('/admin', handlers.AdminBaseHandler),
-    ('/admin/item(?:/?(\d+))?', handlers.ItemHandler),
-    ('/admin/settings', handlers.SettingsHandler)
+    ('/admin', admin_handlers.AdminBaseHandler),
+    ('/admin/item(?:/?(\d+))?', admin_handlers.ItemHandler),
+    ('/admin/settings', admin_handlers.SettingsHandler)
 ]
 ADMIN_ROUTES.extend(SITE_ROUTES)
 

@@ -50,12 +50,11 @@ Also work
   </div>
 
   <div class="submit">
+    <input type="submit" name="action" value="Save" />
     {% if not item.is_published %}
-      <input type="submit" name="action" value="Save" />
-    {% endif %}
-    <input type="submit" name="action" value="Publish" />
-    {% if item.is_saved %}
-      <input type="submit" name="action" value="Delete" />
+      <input type="submit" name="action" value="Publish" />
+    {% else %}
+      <input type="submit" name="action" value="Save &amp; Close" />
     {% endif %}
   </div>
 

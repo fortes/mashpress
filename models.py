@@ -2,6 +2,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext import db
 from google.appengine.api import memcache
 
+import logging
 import datetime
 from lib import helpers
 
@@ -17,17 +18,19 @@ class Setting(db.Model):
         settings = memcache.get('settings')
 
         if not settings:
-            settings = dict([(s.name, s.value) for s in klass.all()])
-            memcache.set('settings', settings)
+            logging.info('Settings cache miss')
+            settings = klass.refresh_cache()
 
         return settings
 
     @classmethod
-    def flush_cache(klass):
-        """Flushed stored settings from memcache. Must be called whenever
+    def refresh_cache(klass):
+        """Replace stored settings from memcache. Must be called whenever
         a settings value is changed
         """
-        memcache.delete('settings')
+        settings = dict([(s.name, s.value) for s in klass.all()])
+        memcache.replace('settings', settings)
+        return settings
 
 
 class Item(db.Expando):

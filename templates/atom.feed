@@ -17,11 +17,11 @@
     <name>{{ settings.author_name }}</name>
     <uri>http://{{ settings.site_host }}/</uri>
   </author>
-  {% if item %}
-    {% include '_post.feed' %}
-  {% endif %}
   {% if posts %}
   <updated>{{ posts.0.updated_date|date:"Y-m-d\TH:i:s\Z" }}</updated>
+    {% if item.content_html %}
+      {% include '_post.feed' %}
+    {% endif %}
     {% for item in posts %}
       {% include '_post.feed' %}
     {% endfor %}

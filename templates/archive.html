@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+<div id="breadcrumb">
+  <a href="/">{{ settings.site_title|escape }}</a> &raquo; Archive
+</div>
+
+<h1>Archive</h1>
+
+{% regroup posts by publish_date.year as years %}
+{% if years %}
+  <div id="archive">
+    {% for year in years %}
+    <div class="year" id="y-{{ year.grouper }}">
+      {% regroup year.list by publish_date.month as months %}
+      {% for month in months %}
+      <h3 id="y-{{ year.grouper }}-m-{{ month.grouper }}">{{ month.list.0.publish_date|date:"M Y" }}</h3>
+      <ol>
+        {% for post in month.list %}
+          <li value={{ post.publish_date.day }}"><a href="{{ post.slug|escape }}">{{ post.title|escape }}</a></li>
+        {% endfor %}
+      </ol>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No posts</p>
+{% endif %}
+{% endblock %}

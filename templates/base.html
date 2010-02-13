@@ -26,8 +26,8 @@
     <meta name="author" content="{{ settings.author_name|escape }}" />
     <link rel="home" href="/" />
     <link rel="index" href="/archive" />
-    <link rel="canonical" href="http://{{ settings.site_host }}{{ item.slug|escape }}" />
     {% if not item.is_root %}
+    <link rel="canonical" href="http://{{ settings.site_host }}{{ item.slug|escape }}" />
     <link rel="bookmark" href="{{ item.slug|escape }}" />
     {% else %}
     <meta name="description" content="{{ settings.site_blurb|striptags|escape }}" />
@@ -37,54 +37,22 @@
   <body>
     <div id="content">
       {% block body %}
-        {% if archive %}
-        <div id="breadcrumb">
-          <a href="/">{{ settings.site_title|escape }}</a> &raquo; Archive
-        </div>
-        {% endif %}
-
-        {% if item.title and not archive %}
+        {% if item.title %}
         <h1>{{ item.title|escape }}</h1>
-        {% endif %}
-        {% if archive %}
-        <h1>Archive</h1>
         {% endif %}
 
         {% if item.content_html %}
         <div id="main-content">{{ item.content_html }}</div>
         {% endif %}
 
-        {% if not archive %}
-          <div id="posts">
-            {% for post in posts %}
-              {% include '_post.html' %}
-            {% endfor %}
-          </div>
-          <div id="archive-link">
-            <a href="{{ item.archive_link }}">Archive of all posts</a>
-          </div>
-        {% else %}
-          {% regroup posts by publish_date.year as years %}
-          {% if years %}
-            <div id="archive">
-              {% for year in years %}
-              <div class="year" id="y-{{ year.grouper }}">
-                {% regroup year.list by publish_date.month as months %}
-                {% for month in months %}
-                <h3 id="y-{{ year.grouper }}-m-{{ month.grouper }}">{{ month.list.0.publish_date|date:"M Y" }}</h3>
-                <ol>
-                  {% for post in month.list %}
-                    <li value={{ post.publish_date.day }}"><a href="{{post.slug}}">{{ post.title|escape }}</a></li>
-                  {% endfor %}
-                </ol>
-                {% endfor %}
-              </div>
-              {% endfor %}
-            </div>
-          {% else %}
-            <p>No posts</p>
-          {% endif %}
-        {% endif %}
+        <div id="posts">
+          {% for post in posts %}
+            {% include '_post.html' %}
+          {% endfor %}
+        </div>
+        <div id="archive-link">
+          <a href="{{ item.archive_link }}">Archive of all posts</a>
+        </div>
       {% endblock %}
     </div>
 
