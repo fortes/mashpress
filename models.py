@@ -29,7 +29,7 @@ class Setting(db.Model):
         a settings value is changed
         """
         settings = dict([(s.name, s.value) for s in klass.all()])
-        memcache.replace('settings', settings)
+        memcache.set('settings', settings)
         return settings
 
 
